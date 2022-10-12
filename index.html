@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dynamic-island</title>
+</head>
+
+<body>
+    <!-- 手机本体 -->
+    <div class="iPhone-14-pro">
+        <!-- 手机屏幕 -->
+        <div class="screen">
+            <div id="screen-wrapper" class="wrapper">
+                <!-- 灵动岛 -->
+                <div id="dynamic-island" class="dynamic-island">
+                    <!-- 来电人信息 -->
+                    <div class="caller">
+                        <!-- 头像 -->
+                        <div class="avatar"></div>
+                        <!-- 信息 -->
+                        <div class="info">
+                            <span>iPhone</span>
+                            <p>库克</p>
+                        </div>
+                    </div>
+                    <!-- 接听和挂断电话按钮 -->
+                    <div class="actions">
+                        <!-- 挂断电话 -->
+                        <div class="refuse">
+                            <ion-icon name="call"></ion-icon>
+                        </div>
+                        <!-- 接听电话 -->
+                        <div class="answer">
+                            <ion-icon name="call"></ion-icon>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 静音键 -->
+        <div class="mute-btn"></div>
+        <!-- 音量增大键 -->
+        <div class="volume-up-btn"></div>
+        <!-- 音量减小键 -->
+        <div class="volume-down-btn"></div>
+        <!-- 电源键 -->
+        <div class="power-btn"></div>
+    </div>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #21222c;
+        }
+
+        /* 手机本体 */
+        .iPhone-14-pro {
+            position: relative;
+            width: 291px;
+            height: 600px;
+            background-color: #998c9e;
+            border-radius: 48px;
+        }
+
+        /* 静音键 */
+        .mute-btn {
+            position: absolute;
+            top: 100px;
+            left: -3px;
+            height: 20px;
+            width: 3px;
+            background: radial-gradient(#ccc, #666, #222);
+        }
+
+        /* 音量增大键 */
+        .volume-up-btn {
+            position: absolute;
+            top: 145px;
+            left: -3px;
+            height: 40px;
+            width: 3px;
+            background: radial-gradient(#ccc, #666, #222);
+        }
+
+        /* 音量减小键 */
+        .volume-down-btn {
+            position: absolute;
+            top: 205px;
+            left: -3px;
+            height: 40px;
+            width: 3px;
+            background: radial-gradient(#ccc, #666, #222);
+        }
+
+        /* 电源键 */
+        .power-btn {
+            position: absolute;
+            top: 175px;
+            right: -3px;
+            height: 70px;
+            width: 3px;
+            background: radial-gradient(#ccc, #666, #222);
+        }
+
+        /* 手机屏幕 */
+        .iPhone-14-pro .screen {
+            position: absolute;
+            inset: 2px;
+            background-color: black;
+            border-radius: 48px;
+            /* 边框 */
+            padding: 10px;
+        }
+
+        /* 屏幕内容 */
+        .iPhone-14-pro .screen .wrapper {
+            width: 100%;
+            height: 100%;
+            border-radius: 40px;
+            background: url(https://cdn.ytechb.com/wp-content/uploads/2022/09/iPhone-14-Pro-Wallpaper-purple.webp);
+            background-size: cover;
+            opacity: 0;
+            transition: 0.5s;
+        }
+
+        .iPhone-14-pro .screen .wrapper:hover {
+            opacity: 1;
+        }
+
+        /* 灵动岛 */
+        .dynamic-island {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: absolute;
+            width: 85px;
+            height: 25px;
+            left: 50%;
+            top: 20px;
+            padding: 0 10px;
+            transform: translateX(-50%);
+            background: black;
+            border-radius: 20px;
+            transition: 0.5s ease-in-out;
+            cursor: default;
+            user-select: none;
+        }
+
+        /* 来电人信息 */
+        .dynamic-island .caller {
+            display: flex;
+            align-items: center;
+            color: white;
+            visibility: hidden;
+            opacity: 0;
+            transition: 0.5s;
+        }
+
+        .dynamic-island .caller .avatar {
+            width: 0;
+            height: 0;
+            background: url(https://photos5.appleinsider.com/gallery/50657-99800-Tim-Cook-xl.jpg);
+            background-size: cover;
+            background-position: -10px;
+            border-radius: 50%;
+            transition: 0.5s;
+        }
+
+        .dynamic-island .caller .info {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .dynamic-island .caller .info span {
+            visibility: hidden;
+            opacity: 0;
+            line-height: 0;
+            color: #666;
+            font-size: 8px;
+            transition: 0.5s;
+        }
+
+        .dynamic-island .caller .info p {
+            font-size: 8px;
+            transition: 0.5s;
+        }
+
+        /* 接听和挂断电话按钮 */
+        .dynamic-island .actions {
+            display: flex;
+            gap: 12px;
+            visibility: hidden;
+            opacity: 0;
+            transition: 0.5s;
+            transition-delay: 0.25s;
+        }
+
+        .dynamic-island .actions .refuse {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            color: #ff4438;
+            transform: rotate(135deg);
+            transition: 0.5s;
+        }
+
+        .dynamic-island .actions .answer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            color: #30d258;
+            transition: 0.5s;
+        }
+
+        /* 鼠标悬浮时灵动岛的状态 */
+        .dynamic-island:hover {
+            width: 200px;
+        }
+
+        .dynamic-island:hover .caller {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .dynamic-island:hover .actions {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* 灵动岛展开状态 */
+        .dynamic-island.expanded {
+            width: 200px;
+            height: 50px;
+        }
+
+        .dynamic-island.expanded .caller {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .dynamic-island.expanded .caller .avatar {
+            width: 30px;
+            height: 30px;
+            margin-right: 8px;
+        }
+
+        .dynamic-island.expanded .caller .info span {
+            visibility: visible;
+            line-height: 8px;
+            opacity: 1;
+        }
+
+        .dynamic-island.expanded .actions {
+            visibility: visible;
+            opacity: 1;
+            transition-delay: 0;
+        }
+
+        .dynamic-island.expanded .actions .refuse {
+            color: white;
+            background-color: #ff4438;
+        }
+
+        .dynamic-island.expanded .actions .answer {
+            color: white;
+            background-color: #30d258;
+        }
+    </style>
+    <script>
+        (() => {
+            const oDynamicIsland = document.getElementById("dynamic-island");
+            const oScreenWrapper = document.getElementById("screen-wrapper");
+            const init = () => {
+                bindEvent();
+            };
+            const bindEvent = () => {
+                // 点击灵动岛时将灵动岛状态变更为展开状态 -- 通过添加一个 .expanded 类名来记录展开状态
+                oDynamicIsland.addEventListener("click", (e) => {
+                    // 阻止事件冒泡到屏幕区域的点击事件监听器中
+                    // 否则每次点击都会被外层的屏幕元素的点击事件监听器移除 .expanded 类名
+                    e.stopPropagation();
+                    oDynamicIsland.classList.add("expanded");
+                });
+                // 点击屏幕内其他区域时取消灵动岛的展开状态
+                oScreenWrapper.addEventListener("click", () => {
+                    oDynamicIsland.classList.remove("expanded");
+                });
+            };
+            init();
+        })();
+
+    </script>
+</body>
+
+</html>
